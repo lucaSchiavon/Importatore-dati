@@ -1,0 +1,129 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PrjImportaCategoriaVarie
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            StreamWriter sw = new StreamWriter(Path.Combine(Environment.CurrentDirectory, "") + @"\Importatore.log", true);
+            StreamWriter swFatturatoEdigit = new StreamWriter(Path.Combine(Environment.CurrentDirectory, "") + @"\FatturatoEdigit.csv", true);
+            try
+            {
+                
+                Console.WriteLine("start");
+             
+                sw.WriteLine("start");
+              
+                ConsoleApp1.IniParser fileIni = new ConsoleApp1.IniParser(Path.Combine(Environment.CurrentDirectory, "") + @"\Inizializzazione.ini");
+                Console.WriteLine("read ini file: " + Path.Combine(Environment.CurrentDirectory, "") + @"\Inizializzazione.ini");
+                sw.WriteLine("read ini file: " + Path.Combine(Environment.CurrentDirectory, "") + @"\Inizializzazione.ini");
+               
+            string connStr = fileIni.GetSetting("IMPORTATORE", "connStr");
+
+                //string Sql = "SELECT [TipografiaID],[RagioneSociale],[HostUrl],[ConnectionString],(SELECT SUBSTRING(SUBSTRING([ConnectionString], CHARINDEX('Initial Catalog=', [ConnectionString]) + LEN('Initial Catalog='), 100), 0, CHARINDEX(';', SUBSTRING([ConnectionString], CHARINDEX('Initial Catalog=', [ConnectionString]) + LEN('Initial Catalog='), 100)))) AS DbName FROM [edigit_v2].[dbo].[TBL_Tipografie]";
+                string Sql = @"SELECT [TipografiaID],[RagioneSociale],[HostUrl],[ConnectionString],(SELECT SUBSTRING(SUBSTRING([ConnectionString], CHARINDEX('Initial Catalog=', [ConnectionString]) + LEN('Initial Catalog='), 100), 0, CHARINDEX(';', SUBSTRING([ConnectionString], CHARINDEX('Initial Catalog=', [ConnectionString]) + LEN('Initial Catalog='), 100)))
+                            ) AS DbName,(SELECT SUBSTRING(SUBSTRING([ConnectionString], CHARINDEX('User ID=', [ConnectionString]) + LEN('User ID='), 100), 0, CHARINDEX(';', SUBSTRING([ConnectionString], CHARINDEX('User ID=', [ConnectionString]) + LEN('User ID='), 100)))
+                            ) AS UserId,(REVERSE(SUBSTRING(reverse([ConnectionString]), 0, CHARINDEX('=', REVERSE([ConnectionString]))))
+                            ) AS Pwd FROM[edigit_v2].[dbo].[TBL_Tipografie]";
+
+                DataTable dtDatabaseEcosistema = getDataTable(connStr, Sql);
+
+                //DataTable dtOutput = new DataTable();
+                double Totale=0;
+            foreach (DataRow dr in dtDatabaseEcosistema.Rows)
+            {
+                    string connStrDbSatellite = @"Data Source=10.0.11.2;Initial Catalog=" + dr["dbname"].ToString() + ";Persist Security Info=True;User ID=" + dr["userid"].ToString() + ";Password=" + dr["pwd"].ToString() ;
+
+                    string sqlDbSatellite = "SELECT sum(TotaleOrdine) FROM tbl_ordini WHERE (OrdineStatoID != 11 or OrdineStatoID != 8 or OrdineStatoID != 9 or OrdineStatoID != 15) and datainserimento >= '1-1-2019'";
+
+                    DataTable dtDatabaseSatellite=null;
+                    try
+                    {
+                        dtDatabaseSatellite = getDataTable(connStrDbSatellite, sqlDbSatellite);
+                        double TotCurrPortal = 0;
+                        if (!Convert.IsDBNull(dtDatabaseSatellite.Rows[0][0]))
+                        {
+                            Totale += Convert.ToDouble(dtDatabaseSatellite.Rows[0][0]);
+                            TotCurrPortal = Convert.ToDouble(dtDatabaseSatellite.Rows[0][0]);
+                        }
+
+                       //swFatturatoEdigit.WriteLine(dr["HostUrl"].ToString() + ";" + dr["RagioneSociale"].ToString() + ";" + TotCurrPortal.ToString("C", CultureInfo.CurrentCulture));
+                        swFatturatoEdigit.WriteLine(dr["HostUrl"].ToString() + ";" + dr["RagioneSociale"].ToString() + ";" + TotCurrPortal);
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        sw.WriteLine(ex.Message);
+                    }
+
+                  
+                }
+
+
+                sw.WriteLine("TOTALE:\t" + Totale.ToString("C", CultureInfo.CurrentCulture));
+                Console.WriteLine("finish");
+                sw.WriteLine("finish");
+                sw.Dispose();
+                sw.Close();
+                swFatturatoEdigit.Dispose();
+                swFatturatoEdigit.Close();
+                Console.Read();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                sw.WriteLine(ex.Message);
+                sw.WriteLine("finish");
+                sw.Dispose();
+                sw.Close();
+                swFatturatoEdigit.Dispose();
+                swFatturatoEdigit.Close();
+            }
+
+        }
+
+        private static  DataTable getDataTable(string connstring, string sqlQuery)
+        {
+
+            DataTable dt;
+                using (SqlConnection con = new SqlConnection(connstring))
+                {
+                    con.Open();
+                    using (SqlDataAdapter da = new SqlDataAdapter(sqlQuery, con))
+                    {
+                        dt = new DataTable();
+                        da.Fill(dt);
+
+                    }
+                }
+            return dt;
+            }
+
+        private static void ExecuteNonQuery(string connstring, string sqlQuery)
+        {
+
+            using (SqlConnection connection = new SqlConnection(
+                connstring))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+        }
+    }
+
+   
+}

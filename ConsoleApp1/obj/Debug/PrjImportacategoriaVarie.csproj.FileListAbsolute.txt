@@ -1,0 +1,21 @@
+E:\GIT_LUCA\Script_Importa_Categoria_Varie\Script_Importacategoria_Varie\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+E:\GIT_LUCA\Script_Importa_Categoria_Varie\Script_Importacategoria_Varie\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+E:\GIT_LUCA\Script_Importa_Categoria_Varie\Script_Importacategoria_Varie\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+E:\GIT_LUCA\Script_Importa_Categoria_Varie\Script_Importacategoria_Varie\ConsoleApp1\obj\Debug\PrjImportacategoriaVarie.csproj.CoreCompileInputs.cache
+E:\GIT_LUCA\Script_Importa_Categoria_Varie\Script_Importacategoria_Varie\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+E:\GIT_LUCA\Script_Importa_Categoria_Varie\Script_Importacategoria_Varie\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+E:\GIT_LUCA\Script_Importa_Categoria_Varie\Script_Importacategoria_Varie\ConsoleApp1\obj\Debug\PrjImportaCategoriaVarie.csprojAssemblyReference.cache
+E:\GIT_LUCA\Script_Importa_Categoria_Varie - Copia\Script_Importacategoria_Varie\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+E:\GIT_LUCA\Script_Importa_Categoria_Varie - Copia\Script_Importacategoria_Varie\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+E:\GIT_LUCA\Script_Importa_Categoria_Varie - Copia\Script_Importacategoria_Varie\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+E:\GIT_LUCA\Script_Importa_Categoria_Varie - Copia\Script_Importacategoria_Varie\ConsoleApp1\obj\Debug\PrjImportaCategoriaVarie.csprojAssemblyReference.cache
+E:\GIT_LUCA\Script_Importa_Categoria_Varie - Copia\Script_Importacategoria_Varie\ConsoleApp1\obj\Debug\PrjImportaCategoriaVarie.csproj.CoreCompileInputs.cache
+E:\GIT_LUCA\Script_Importa_Categoria_Varie - Copia\Script_Importacategoria_Varie\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+E:\GIT_LUCA\Script_Importa_Categoria_Varie - Copia\Script_Importacategoria_Varie\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+E:\GIT_LUCA\ImportazioneNuoveSedi\Import nuove sedi\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+E:\GIT_LUCA\ImportazioneNuoveSedi\Import nuove sedi\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+E:\GIT_LUCA\ImportazioneNuoveSedi\Import nuove sedi\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+E:\GIT_LUCA\ImportazioneNuoveSedi\Import nuove sedi\ConsoleApp1\obj\Debug\PrjImportaCategoriaVarie.csproj.CoreCompileInputs.cache
+E:\GIT_LUCA\ImportazioneNuoveSedi\Import nuove sedi\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+E:\GIT_LUCA\ImportazioneNuoveSedi\Import nuove sedi\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+E:\GIT_LUCA\ImportazioneNuoveSedi\Import nuove sedi\ConsoleApp1\obj\Debug\PrjImportaCategoriaVarie.csprojAssemblyReference.cache
